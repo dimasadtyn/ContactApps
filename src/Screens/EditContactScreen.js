@@ -13,7 +13,6 @@ const width = Dimensions.get("window").width
 const height = Dimensions.get("window").height
 
 export default function EditContactScreen({route, navigation}) {
-  console.log(route.params);
   const [firstName, setFirstName] = useState(`${route.params.firstName}`)
   const [lastName, setLastName] = useState(`${route.params.lastName}`)
   const [age, setAge] = useState(`${JSON.stringify(route.params.age)}`)

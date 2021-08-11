@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, Dimensions, StyleSheet, F, TextInput, TouchableOpacity, FlatList, Image, ScrollView } from 'react-native'
+import { View, Text, Dimensions, StyleSheet, TextInput, TouchableOpacity, RefreshControl, ScrollView } from 'react-native'
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import FastImage from 'react-native-fast-image'
 import { useNavigation } from '@react-navigation/native'
@@ -14,6 +14,7 @@ export default function Contact() {
   const navigation = useNavigation();
   const [contact, setContact] = useState(null)
   const [search, setSearch] = useState('')
+  const [refreshing, setRefreshing] = useState(false)
 
   useEffect(async () => {
     const unsubscribe = navigation.addListener('focus', async () => {
@@ -37,6 +38,14 @@ export default function Contact() {
     setSearch(text);
   };
 
+  const onRefresh = () => {
+    setRefreshing(true)
+    getAllContact()
+    setTimeout(() => {
+      setRefreshing(false)
+    },1000)
+  }
+
   return(
     contact == null ?
       <Loading/>
@@ -59,7 +68,7 @@ export default function Contact() {
           <Icon name="closecircle" type="ant-design" size={24} color={search == '' ? "#f3f5f7" : "grey"} />
         </TouchableOpacity>
       </View>
-      <ScrollView>
+      <ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}>
         {contact.map((item) => {
           if((item.firstName.toLowerCase().indexOf(search.toLowerCase())>-1) || (item.lastName.toLowerCase().indexOf(search.toLowerCase())>-1)) {
             return (
@@ -126,11 +135,11 @@ const styles = StyleSheet.create({
     flexDirection : 'row',
     alignItems : 'center',
     borderRadius : 20,
-    // borderWidth : 1,
     justifyContent : 'space-evenly',
     fontSize : 20,
     alignSelf : 'center',
-    backgroundColor : '#f3f5f7'
+    backgroundColor : '#f3f5f7',
+    marginBottom : 10
   },
   inputContainer : {
     width : width * 0.7,
