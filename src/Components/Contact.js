@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import { View, Text, Dimensions, StyleSheet, TextInput, TouchableOpacity, RefreshControl, ScrollView } from 'react-native'
+import { View, Text, Dimensions, StyleSheet, TextInput, TouchableOpacity, RefreshControl, ScrollView, Alert } from 'react-native'
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import FastImage from 'react-native-fast-image'
 import { useNavigation } from '@react-navigation/native'
@@ -31,6 +31,15 @@ export default function Contact() {
     })
     .catch((err) => {
       // console.log(err);
+      Alert.alert(
+        "Error",
+        "Something went wrong, please try again later",
+        [
+          {
+            text : "OKE",
+          }
+        ]
+      )
     })
   }
 
