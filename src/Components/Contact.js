@@ -137,7 +137,8 @@ const styles = StyleSheet.create({
     fontSize : 18,
     marginTop : 15,
     marginLeft : 15,
-    marginBottom : 10
+    marginBottom : 10,
+    color : 'black'
   },
   searchContainer : {
     width : width * 0.97,

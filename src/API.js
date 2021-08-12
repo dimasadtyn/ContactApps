@@ -47,6 +47,10 @@ export async function editContact(id, data) {
     .then(({data}) => {
       return data
     })
+    .catch((err) => {
+      console.log(err);
+      return err
+    })
   }))
 }
 

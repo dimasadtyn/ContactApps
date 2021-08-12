@@ -35,7 +35,8 @@ const styles = StyleSheet.create({
     fontSize : 28,
     fontWeight : '700',
     alignSelf : 'center',
-    marginBottom : 15
+    marginBottom : 15,
+    color : 'black'
   },
   searchContainer : {
     width : width * 0.97,

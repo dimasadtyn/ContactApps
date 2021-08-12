@@ -64,6 +64,16 @@ export default function EditContactScreen({route, navigation}) {
           }
         ]
       )
+    } else if(firstName.indexOf(' ') >= 0 || lastName.indexOf(' ') >= 0 || age.indexOf(' ') >= 0) {
+      Alert.alert(
+        "Failed",
+        "Must only contain alpha-numeric characters",
+        [
+          {
+            text : "OKE",
+          }
+        ]
+      )
     } else {
       setWait(true)
 
@@ -102,7 +112,7 @@ export default function EditContactScreen({route, navigation}) {
       })
       .catch((err) => {
         setWait(false)
-        // console.log(err);
+        console.log(err);
         Alert.alert(
           "Error",
           "Something went wrong, please try again later",
@@ -248,7 +258,8 @@ const styles = StyleSheet.create({
   },
   text : {
     fontWeight : '700',
-    fontSize : 16
+    fontSize : 16,
+    color : 'black'
   },
   inputContainer : {
     width : width * 0.9,

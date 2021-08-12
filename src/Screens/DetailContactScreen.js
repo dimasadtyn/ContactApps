@@ -20,7 +20,7 @@ export default function DetailContactScreen({route, navigation}) {
       }
       <TouchableOpacity style={styles.btnEdit} onPress={() => {navigation.navigate("EditContact", route.params)}}>
         <Icon name="edit-3" type="feather" size={24} color="grey" style={styles.icon}/>
-        <Text style={{fontSize : 16, marginLeft : 5}}>
+        <Text style={{fontSize : 16, marginLeft : 5, color : 'black'}}>
           Edit Contact
         </Text>
       </TouchableOpacity>
@@ -77,7 +77,8 @@ const styles = StyleSheet.create({
     alignSelf : 'center'
   },
   text : {
-    fontSize : 16
+    fontSize : 16,
+    color : 'black'
   },
   inputContainer : {
     width : width * 0.9,
@@ -87,7 +88,8 @@ const styles = StyleSheet.create({
   },
   textVal : {
     fontWeight : '700',
-    fontSize : 20
+    fontSize : 20,
+    color : 'black'
   },
   btnEdit : {
     alignSelf : 'center',
