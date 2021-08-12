@@ -1,6 +1,6 @@
-import React from 'react'
-import { View, Text, StyleSheet, Dimensions, ScrollView, Image } from 'react-native'
-import LinearGradient from 'react-native-linear-gradient';
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, Dimensions, Modal, Image } from 'react-native'
+import ImageViewer from 'react-native-image-zoom-viewer';
 import { Icon } from 'react-native-elements';
 
 import Header from '../Components/Header'
@@ -10,13 +10,16 @@ const width = Dimensions.get("window").width
 const height = Dimensions.get("window").height
 
 export default function DetailContactScreen({route, navigation}) {
+  const [isImageViewVisible, setisImageViewVisible] = useState(false)
   return (
     <View style={styles.container}>
       <Header title='Detail Contact'/>
       {route.params.photo == 'N/A' ?
         <Icon name="user-circle-o" type="font-awesome" size={80} color="grey" style={styles.icon}/>
       :
-        <Image source={{uri : route.params.photo}} style={styles.image} />
+        <TouchableOpacity style={styles.btnImage} onPress={() => setisImageViewVisible(true)}>
+          <Image source={{uri : route.params.photo}} style={styles.image} />
+        </TouchableOpacity>
       }
       <TouchableOpacity style={styles.btnEdit} onPress={() => {navigation.navigate("EditContact", route.params)}}>
         <Icon name="edit-3" type="feather" size={24} color="grey" style={styles.icon}/>
@@ -50,6 +53,15 @@ export default function DetailContactScreen({route, navigation}) {
           </Text>
         </View>
       </View>
+      <Modal visible={isImageViewVisible} transparent={true}>
+        <ImageViewer
+          imageUrls={[{
+            url : route.params.photo
+          }]}
+          enableSwipeDown={true}
+          onSwipeDown={() => setisImageViewVisible(false)}
+        />
+      </Modal>
     </View>
   )
 }
@@ -74,6 +86,9 @@ const styles = StyleSheet.create({
     width : 80, 
     height : 80,
     borderRadius : 20,
+    alignSelf : 'center'
+  },
+  btnImage : {
     alignSelf : 'center'
   },
   text : {

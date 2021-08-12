@@ -154,6 +154,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
+        release {
+            storeFile file('SimpleApp.keystore')
+            storePassword 'ContactApps'
+            keyAlias 'SimpleApp'
+            keyPassword 'ContactApps'
+        }
     }
     buildTypes {
         debug {
